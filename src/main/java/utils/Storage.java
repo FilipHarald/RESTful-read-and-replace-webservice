@@ -12,7 +12,7 @@ public class Storage {
 		System.out.println("saveText");
 		try {
 			Files.write(Paths.get("TextFiles/" + (++counter) + ".txt"), fileText.getBytes());
-			Files.write(Paths.get("TextFiles/conf"), ("" + counter).getBytes());
+			Files.write(Paths.get("conf"), ("" + counter).getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -22,7 +22,7 @@ public class Storage {
 		System.out.println("initCounter");
 		counter = 0;
 		try {
-			List<String> lines = Files.readAllLines(Paths.get("TextFiles/conf"));
+			List<String> lines = Files.readAllLines(Paths.get("conf"));
 			counter = Integer.parseInt(lines.get(0));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -34,11 +34,25 @@ public class Storage {
 		String text = "";
 		try {
 			for(String s : Files.readAllLines(Paths.get("TextFiles/" + fileNbr + ".txt"))){
-				text += s + "\n";
+				text += s + "<br>";
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return text;
+	}
+	public static String getTextIds(){
+		String ids = "";
+		
+		try {
+			Files.walk(Paths.get("TextFiles/")).forEach(filePath-> {
+			    if (Files.isRegularFile(filePath)) {
+			        ids += filePath + "\n";
+			    }
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "lol";
 	}
 }

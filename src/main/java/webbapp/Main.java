@@ -23,7 +23,12 @@ public class Main {
         	String processedText = TextProcessor.fooBar(textLines);
         	System.out.println(processedText);
         	Storage.saveText(processedText);
-        	return "meh";
+        	return "File processed and saved";
         });
+        
+        get("/texts", (request, response) -> {
+        	return Storage.getTextIds();
+        });
+        
     }
 }
