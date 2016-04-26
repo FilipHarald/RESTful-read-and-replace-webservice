@@ -3,12 +3,13 @@ package utils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Storage {
 	private static int counter; 
 
-	public static void saveText(String fileText) {
+	public static int saveText(String fileText) {
 		System.out.println("saveText");
 		try {
 			Files.write(Paths.get("TextFiles/" + (++counter) + ".txt"), fileText.getBytes());
@@ -16,6 +17,7 @@ public class Storage {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return counter;
 	}
 
 	public static void initCounter() {
@@ -42,17 +44,24 @@ public class Storage {
 		return text;
 	}
 	public static String getTextIds(){
-		String ids = "";
+		LinkedList<String> fileNames = new LinkedList<String>();
 		
 		try {
 			Files.walk(Paths.get("TextFiles/")).forEach(filePath-> {
 			    if (Files.isRegularFile(filePath)) {
-			        ids += filePath + "\n";
+			        fileNames.add("" + filePath);
 			    }
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "lol";
+		String ids = "The text IDs are as follows: <br>";
+		for(String fileName : fileNames){
+			System.out.println(fileName);
+			if(fileName.length() < 17){				
+				ids += fileName.substring("TextFiles/".length(), fileName.length()-4) + "<br>";
+			}
+		}
+		return ids;
 	}
 }

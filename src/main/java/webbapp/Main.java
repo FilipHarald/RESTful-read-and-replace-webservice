@@ -21,9 +21,12 @@ public class Main {
         	String[] textLines = TextProcessor.getTextFileLines(request.body());
         	System.out.println("In main: textLines is: " + textLines.length);
         	String processedText = TextProcessor.fooBar(textLines);
-        	System.out.println(processedText);
-        	Storage.saveText(processedText);
-        	return "File processed and saved";
+//        	System.out.println(processedText);
+        	int id = Storage.saveText(processedText);
+        	return "File processed and saved" + 
+        			"<br> It can be found at http://localhost:4567/texts/" + id +
+        			"<br> Here is the processed text:" + 
+        			processedText;
         });
         
         get("/texts", (request, response) -> {

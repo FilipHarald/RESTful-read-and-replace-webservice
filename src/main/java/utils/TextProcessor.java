@@ -37,7 +37,7 @@ public class TextProcessor {
 		System.out.println("doFooBar");
 		String text = "";
 		for(String line : textLines){
-			System.out.println(line);
+//			System.out.println(line);
 			String temp = line;
 			for(String mostUsedWord : mostUsedWords){
 				temp = temp.replaceAll("(?i)\\b" + mostUsedWord + "\\b", "FOO$0BAR");
@@ -61,6 +61,10 @@ public class TextProcessor {
 			if(e.getValue() == highest){
 				mostUsedWords.add(e.getKey());
 			}
+		}
+		System.out.println("Most used word(s) are: ");
+		for (String w : mostUsedWords) {
+			System.out.println("        " + w);
 		}
 		System.out.println("occurrences: " + mostUsedWords.size()*highest);
 		return mostUsedWords;
