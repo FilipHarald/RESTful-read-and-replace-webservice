@@ -36,9 +36,13 @@ public class TextProcessor {
 	private static String doFooBar(String[] textLines, ArrayList<String> mostUsedWords) {
 		System.out.println("doFooBar");
 		String text = "";
+		int counter = 0;
 		for(String line : textLines){
 //			System.out.println(line);
 			String temp = line;
+			if((counter)%10000==0){
+				System.out.println(counter++);
+			}
 			for(String mostUsedWord : mostUsedWords){
 				temp = temp.replaceAll("(?i)\\b" + mostUsedWord + "\\b", "FOO$0BAR");
             }
