@@ -37,11 +37,12 @@ public class TextProcessor {
 		System.out.println("doFooBar");
 		String text = "";
 		int counter = 0;
+		System.out.println("processed lines....");
 		for(String line : textLines){
 //			System.out.println(line);
 			String temp = line;
-			if((counter)%10000==0){
-				System.out.println(counter++);
+			if(++counter%10000==0){
+				System.out.println("......" + counter);
 			}
 			for(String mostUsedWord : mostUsedWords){
 				temp = temp.replaceAll("(?i)\\b" + mostUsedWord + "\\b", "FOO$0BAR");
